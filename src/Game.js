@@ -7,36 +7,39 @@ class Game extends Component {
 				super(props);
 				this.state = {
 						history :  [{ cards : this.generateDeck(), lastMove : ''}],
-						cardVisible : false,
+						cardDisplayed : false,
 						stepNumber : 0
 				};
 		}
 
 		generateDeck(){
-				  //TODO: fill with pairs of letters randomly
-				  return Array(boardRows*boardRows).fill('x');
-		}
-
-		jumpTo(move){
-				const step = this.state.history.indexOf(move);
-				this.setState({
-						stepNumber : step,
-						cardVisible : (step % 2) === 0
-				});
+				  const deckSize = boardRows*boardRows;
+				  const letters = ['a','b','c','d','e','f','g','h'];
+				  let duplicatedItems = letters.reduce(
+							 (res,current) => res.concat([current,current]),[]);
+				  let orderedDeck = duplicatedItems
+							 .map((letter) => { return {value : letter, visible: false}});
+				  let shuffledDeck = [];
+				  for(let i=0; i < deckSize; i++){
+							 let randomIndex = Math.floor(Math.random() * 
+										(orderedDeck.length - i)); 
+							 shuffledDeck.push(orderedDeck.splice(randomIndex, 1)[0]);
+				  }
+				  return shuffledDeck;
 		}
 
 		handleClick(i) {
 				const history = this.state.history.slice(0, this.state.stepNumber + 1);
 				const current = history[history.length -1];
 				const cards = current.cards.slice();
-				if(isGameOver(cards) || cards[i]){
+				if(isGameOver(cards) || cards[i].visible){
 						return;
 				}
-				cards[i] = 'X';
+				cards[i].visible = true;
 				this.setState({
 						history: history.concat({cards : cards, lastMove : getCoordinates(i)}),
 						stepNumber: history.length,
-						cardVisible : !this.state.cardVisible 
+						cardDisplayed : !this.state.cardDisplayed 
 				});
 		}
 
@@ -47,19 +50,15 @@ class Game extends Component {
 
 				const moves = history.map((move, step) => {
 						const desc = (move.lastMove ?  move.lastMove: "Start");
-						const isSelectedStep = step === this.state.stepNumber;
-						return (
-								<li key={move}>
-										<button className={isSelectedStep ? 'bold' : ''} onClick={() => this.jumpTo(move)}> {desc} </button>
-								</li>
-								);
+						return (<li key={step}> <span> {desc} </span> </li>);
 				});
 
 				let status;
 				if(winner){
 						status = 'Winner. Game over.';
 				}else{
-						status = this.state.cardVisible ? 'Pick another card' : 'Pick any card';
+						  status = this.state.cardDisplayed 
+									 ? 'Pick another card' : 'Pick any card';
 				}
 
 				return (
@@ -80,7 +79,7 @@ class Game extends Component {
 }
 
 function isGameOver(cards) {
-		  return !cards.includes(null);
+		  return false;
 }
 
 function getCoordinates(card){
