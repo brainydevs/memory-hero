@@ -2,18 +2,19 @@ import React, {Component} from 'react';
 
 export const boardRows = 4;
 export default class Board extends Component {
-		renderSquare(i) {
+		renderCard(i) {
 				return (
-						<Square key={i} value={this.props.squares[i]}
+						  <Card key={i} value={this.props.cards[i]} visible={true}
 								onClick={() => this.props.onClick(i)} />
 						);
+				//TODO: visible must be toggled by onClick inside this component
 		}
 		renderRow(row) {
-				let renderedSquares = [];
+				let renderedCards = [];
 				for(let i = (row - 1) * boardRows; i < row * boardRows; i++){
-						renderedSquares.push(this.renderSquare(i));
+						renderedCards.push(this.renderCard(i));
 				}
-				return renderedSquares;
+				return renderedCards;
 		}
 		renderBoard(){
 				let board = [];
@@ -36,10 +37,10 @@ export default class Board extends Component {
 		}
 }
 
-function Square(props){
+function Card(props){
 		return (
-				<button className='square' onClick={props.onClick}>
-						{props.value}
+				<button className='card' onClick={props.onClick}>
+						{props.visible ? props.value : null}
 				</button>
 				);
 }

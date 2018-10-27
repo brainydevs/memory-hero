@@ -6,10 +6,15 @@ class Game extends Component {
 		constructor(props){
 				super(props);
 				this.state = {
-						history :  [{ squares : Array(boardRows*boardRows).fill(null) , lastMove : ''}],
+						history :  [{ cards : this.generateDeck(), lastMove : ''}],
 						cardVisible : false,
 						stepNumber : 0
 				};
+		}
+
+		generateDeck(){
+				  //TODO: fill with pairs of letters randomly
+				  return Array(boardRows*boardRows).fill('x');
 		}
 
 		jumpTo(move){
@@ -23,13 +28,13 @@ class Game extends Component {
 		handleClick(i) {
 				const history = this.state.history.slice(0, this.state.stepNumber + 1);
 				const current = history[history.length -1];
-				const squares = current.squares.slice();
-				if(isGameOver(squares) || squares[i]){
+				const cards = current.cards.slice();
+				if(isGameOver(cards) || cards[i]){
 						return;
 				}
-				squares[i] = 'X';
+				cards[i] = 'X';
 				this.setState({
-						history: history.concat({squares : squares, lastMove : getCoordinates(i)}),
+						history: history.concat({cards : cards, lastMove : getCoordinates(i)}),
 						stepNumber: history.length,
 						cardVisible : !this.state.cardVisible 
 				});
@@ -38,7 +43,7 @@ class Game extends Component {
 		render() {
 				const history = this.state.history;
 				const current = history[this.state.stepNumber];
-				const winner = isGameOver(current.squares);
+				const winner = isGameOver(current.cards);
 
 				const moves = history.map((move, step) => {
 						const desc = (move.lastMove ?  move.lastMove: "Start");
@@ -61,7 +66,7 @@ class Game extends Component {
 						<div className="game">
 								<div className="game-board">
 										<Board 
-												squares={current.squares}
+												cards={current.cards}
 												onClick={(i) => this.handleClick(i)}
 										/>
 								</div>
@@ -74,12 +79,12 @@ class Game extends Component {
 		}
 }
 
-function isGameOver(squares) {
-		  return !squares.includes(null);
+function isGameOver(cards) {
+		  return !cards.includes(null);
 }
 
-function getCoordinates(square){
-		return " ("+ (Math.floor(square / boardRows) + 1) + ',' + (square % boardRows + 1) + ')'
+function getCoordinates(card){
+		return " ("+ (Math.floor(card / boardRows) + 1) + ',' + (card % boardRows + 1) + ')'
 }
 
 export default Game;

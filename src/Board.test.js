@@ -1,14 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {shallow} from 'enzyme';
 import Board from './Board';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render((<Board 
-			 squares={[]}
-			 winningSquares={[]}
+  shallow(<Board 
+			 cards={[]}
 			 onClick={(i) => console.log(i)}
-  />)
-  , div);
-  ReactDOM.unmountComponentAtNode(div);
+  />);
+});
+
+xit('shows card value on click', () => {
+  shallow(<Board 
+			 cards={[]}
+			 onClick={(i) => console.log(i)}
+  />);
 });
