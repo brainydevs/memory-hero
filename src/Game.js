@@ -6,9 +6,8 @@ class Game extends Component {
 		constructor(props){
 				super(props);
 				this.state = {
-						history :  [{ cards : this.generateDeck(), lastMove : ''}],
+						cards : this.generateDeck(),
 						cardDisplayed : false,
-						stepNumber : 0
 				};
 		}
 
@@ -29,49 +28,38 @@ class Game extends Component {
 		}
 
 		handleClick(i) {
-				const history = this.state.history.slice(0, this.state.stepNumber + 1);
-				const current = history[history.length -1];
-				const cards = current.cards.slice();
+				const cards = this.state.cards.slice();
 				if(isGameOver(cards) || cards[i].visible){
 						return;
 				}
 				cards[i].visible = true;
 				this.setState({
-						history: history.concat({cards : cards, lastMove : getCoordinates(i)}),
-						stepNumber: history.length,
+						cards: cards,
 						cardDisplayed : !this.state.cardDisplayed 
 				});
 		}
 
 		render() {
-				const history = this.state.history;
-				const current = history[this.state.stepNumber];
-				const winner = isGameOver(current.cards);
-
-				const moves = history.map((move, step) => {
-						const desc = (move.lastMove ?  move.lastMove: "Start");
-						return (<li key={step}> <span> {desc} </span> </li>);
-				});
+				const cards = this.state.cards.slice();
+				const winner = isGameOver(cards);
 
 				let status;
 				if(winner){
-						status = 'Winner. Game over.';
+						  status = 'Winner. Game over.';
 				}else{
 						  status = this.state.cardDisplayed 
 									 ? 'Pick another card' : 'Pick any card';
-				}
-
+				} 
 				return (
 						<div className="game">
 								<div className="game-board">
 										<Board 
-												cards={current.cards}
+												cards={cards}
 												onClick={(i) => this.handleClick(i)}
 										/>
 								</div>
 								<div className="game-info">
 										<div>{status}</div>
-										<ol>{moves}</ol>
 								</div>
 						</div>
 						);
@@ -80,10 +68,6 @@ class Game extends Component {
 
 function isGameOver(cards) {
 		  return false;
-}
-
-function getCoordinates(card){
-		return " ("+ (Math.floor(card / boardRows) + 1) + ',' + (card % boardRows + 1) + ')'
 }
 
 export default Game;

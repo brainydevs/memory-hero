@@ -16,7 +16,7 @@ it('passes props to board', () => {
 });
 
 it('generates cards with letter values', () => {
-		  let generatedDeck = wrapper.state('history')[0].cards;
+		  let generatedDeck = wrapper.state('cards');
 		  expect(generatedDeck.filter((c) => c.value === 'a').length).toBe(2);
 		  expect(generatedDeck.filter((c) => c.value === 'b').length).toBe(2);
 		  expect(generatedDeck.filter((c) => c.value === 'c').length).toBe(2);
@@ -28,7 +28,7 @@ it('generates cards with letter values', () => {
 });
 
 it('displays card upon click event', () => {
-		  let deck = wrapper.state('history')[0].cards;
+		  let deck = wrapper.state('cards');
 		  let chosenCard = 5;
 		  expect(deck[chosenCard].visible).toBe(false);
 		  wrapper.instance().handleClick(chosenCard)
