@@ -20,8 +20,7 @@ ol, ul {
 .card {
   border: 5px double #999;
   float: left;
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 12px;
   line-height: 100px;
   height: 120px;
   margin-right: 5px;
@@ -29,6 +28,15 @@ ol, ul {
   padding: 0;
   text-align: center;
   width: 90px;
+}
+
+.card-front img {
+display:block;		  
+margin : auto;
+height: 64px;
+width: 64px;
+margin-top: 8px;
+margin-bottom: -30px;
 }
 
 .card-front {

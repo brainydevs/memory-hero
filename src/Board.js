@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import icon from './favicon.ico';
 
 export const boardRows = 4;
 export default class Board extends Component {
@@ -42,6 +43,7 @@ function Card(props){
 		  if(props.visible){
 					 return (
 								<button className='card card-front' onClick={props.onClick}>
+										  <img alt="Superhero icon" src={icon}/>
 										  {props.value}
 								</button>
 								);
