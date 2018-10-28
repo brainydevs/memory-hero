@@ -66,7 +66,7 @@ class Game extends Component {
 
 				let status;
 				if(winner){
-						  status = 'Winner. Game over.';
+						  status = 'Congrats! You\'ve won the game!';
 				}else{
 						  status = 'Pick any card';
 				} 
@@ -87,7 +87,7 @@ class Game extends Component {
 }
 
 function isGameOver(cards) {
-		  return false;
+		  return !cards.map((card) => card.visible).includes(false);
 }
 
 export default Game;
