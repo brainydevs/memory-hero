@@ -7,7 +7,7 @@ class Game extends Component {
 				super(props);
 				this.state = {
 						cards : this.generateDeck(),
-						cardDisplayed : false,
+						previousCard: null,
 				};
 		}
 
@@ -27,15 +27,36 @@ class Game extends Component {
 				  return shuffledDeck;
 		}
 
+		hideCardsWithDelay(cardsToHide){
+				  setTimeout(() => {
+							 if(cardsToHide){
+										const cards = this.state.cards.slice();
+										cardsToHide.forEach((card) => {
+												  cards[card].visible = false;
+										});
+										this.setState({ cards : cards });
+							 }
+				  },300);
+		}
+
 		handleClick(i) {
 				const cards = this.state.cards.slice();
+				let previousCard = this.state.previousCard;
 				if(isGameOver(cards) || cards[i].visible){
 						return;
 				}
-				cards[i].visible = true;
+				cards[i].visible = true; //always show
+				if(previousCard !== null){ //has previously selected card
+						  if(cards[previousCard].value !== cards[i].value){ 
+									 this.hideCardsWithDelay([previousCard, i]);
+						  }
+						  previousCard = null; //clear
+				}else{
+						  previousCard = i;
+				}
 				this.setState({
 						cards: cards,
-						cardDisplayed : !this.state.cardDisplayed 
+						previousCard : previousCard,
 				});
 		}
 
@@ -47,8 +68,7 @@ class Game extends Component {
 				if(winner){
 						  status = 'Winner. Game over.';
 				}else{
-						  status = this.state.cardDisplayed 
-									 ? 'Pick another card' : 'Pick any card';
+						  status = 'Pick any card';
 				} 
 				return (
 						<div className="game">
