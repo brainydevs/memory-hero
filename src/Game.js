@@ -8,6 +8,7 @@ class Game extends Component {
 				this.state = {
 						cards : this.generateDeck(),
 						previousCard: null,
+						moveCounter: 0
 				};
 		}
 
@@ -57,6 +58,7 @@ class Game extends Component {
 				this.setState({
 						cards: cards,
 						previousCard : previousCard,
+						moveCounter : this.state.moveCounter + 1
 				});
 		}
 
@@ -66,20 +68,21 @@ class Game extends Component {
 
 				let status;
 				if(winner){
-						  status = 'Congrats! You\'ve won the game!';
+						  status = 'Congrats! You\'ve won the game in ' 
+									 + this.state.moveCounter + ' moves.';
 				}else{
-						  status = 'Pick any card';
+						  status = 'Moves: ' + this.state.moveCounter;
 				} 
 				return (
 						<div className="game">
+								<div className="game-info">
+										<div>{status}</div>
+								</div>
 								<div className="game-board">
 										<Board 
 												cards={cards}
 												onClick={(i) => this.handleClick(i)}
 										/>
-								</div>
-								<div className="game-info">
-										<div>{status}</div>
 								</div>
 						</div>
 						);

@@ -9,7 +9,6 @@ export default class Board extends Component {
 						  <Card key={i} value={cardValue} visible={isVisible}
 								onClick={() => this.props.onClick(i)} />
 						);
-				//TODO: visible must be toggled by onClick inside this component
 		}
 		renderRow(row) {
 				let renderedCards = [];
@@ -40,10 +39,13 @@ export default class Board extends Component {
 }
 
 function Card(props){
-		return (
-				<button className='card' onClick={props.onClick}>
-						{props.visible ? props.value : null}
-				</button>
-				);
+		  if(props.visible){
+					 return (
+								<button className='card card-front' onClick={props.onClick}>
+										  {props.value}
+								</button>
+								);
+		  }
+		  return <button className='card card-back' onClick={props.onClick}/>;
 }
 
