@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Board, {boardRows} from './Board';
+import 'whatwg-fetch';
+import {Auth} from './ApiKeys'
 import icon from './favicon.ico';
 import './Game.css';
 
