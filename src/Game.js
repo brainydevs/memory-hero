@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Board, {boardRows} from './Board';
+import icon from './favicon.ico';
 import './Game.css';
 
 class Game extends Component {
@@ -14,11 +15,12 @@ class Game extends Component {
 
 		generateDeck(){
 				  const deckSize = boardRows*boardRows;
-				  const letters = ['a','b','c','d','e','f','g','h'];
-				  let duplicatedItems = letters.reduce(
+				  const heroNames = ['Deadpool','Spiderman','Capitan America','Thor','Hulk','Black Panther','Black Widow','Hawkeye'];
+				  const heroCollection = heroNames.map((name,step) => {return { id: step, name: name, img: icon }});
+				  let duplicatedItems = heroCollection.reduce(
 							 (res,current) => res.concat([current,current]),[]);
 				  let orderedDeck = duplicatedItems
-							 .map((letter) => { return {value : letter, visible: false}});
+							 .map((hero) => { return {value : hero, visible: false}});
 				  let shuffledDeck = [];
 				  for(let i=0; i < deckSize; i++){
 							 let randomIndex = Math.floor(Math.random() * 
@@ -48,7 +50,7 @@ class Game extends Component {
 				}
 				cards[i].visible = true; //always show
 				if(previousCard !== null){ //has previously selected card
-						  if(cards[previousCard].value !== cards[i].value){ 
+						  if(cards[previousCard].value.id !== cards[i].value.id){ 
 									 this.hideCardsWithDelay([previousCard, i]);
 						  }
 						  previousCard = null; //clear

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import icon from './favicon.ico';
 
-export const boardRows = 4;
+export const boardRows = 4; //TODO: fix bug for 6,8 - prob due to hardcoded # of cards
 export default class Board extends Component {
 		renderCard(i) {
 		      let cardValue = this.props.cards[i] && this.props.cards[i].value;
@@ -43,8 +42,8 @@ function Card(props){
 		  if(props.visible){
 					 return (
 								<button className='card card-front' onClick={props.onClick}>
-										  <img alt="Superhero icon" src={icon}/>
-										  {props.value}
+										  <img alt="Superhero icon" src={props.value.img}/>
+										  {props.value.name}
 								</button>
 								);
 		  }

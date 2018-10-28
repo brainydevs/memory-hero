@@ -15,16 +15,16 @@ it('passes props to board', () => {
   expect(board).toHaveProp('onClick');
 });
 
-it('generates cards with letter values', () => {
+it('generates cards with hero Ids', () => {
 		  let generatedDeck = wrapper.state('cards');
-		  expect(generatedDeck.filter((c) => c.value === 'a').length).toBe(2);
-		  expect(generatedDeck.filter((c) => c.value === 'b').length).toBe(2);
-		  expect(generatedDeck.filter((c) => c.value === 'c').length).toBe(2);
-		  expect(generatedDeck.filter((c) => c.value === 'd').length).toBe(2);
-		  expect(generatedDeck.filter((c) => c.value === 'e').length).toBe(2);
-		  expect(generatedDeck.filter((c) => c.value === 'f').length).toBe(2);
-		  expect(generatedDeck.filter((c) => c.value === 'g').length).toBe(2);
-		  expect(generatedDeck.filter((c) => c.value === 'h').length).toBe(2);
+		  expect(generatedDeck.filter((c) => c.value.id === 0).length).toBe(2);
+		  expect(generatedDeck.filter((c) => c.value.id === 1).length).toBe(2);
+		  expect(generatedDeck.filter((c) => c.value.id === 2).length).toBe(2);
+		  expect(generatedDeck.filter((c) => c.value.id === 3).length).toBe(2);
+		  expect(generatedDeck.filter((c) => c.value.id === 4).length).toBe(2);
+		  expect(generatedDeck.filter((c) => c.value.id === 5).length).toBe(2);
+		  expect(generatedDeck.filter((c) => c.value.id === 6).length).toBe(2);
+		  expect(generatedDeck.filter((c) => c.value.id === 7).length).toBe(2);
 });
 
 it('displays card upon click event', () => {
