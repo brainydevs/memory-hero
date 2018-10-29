@@ -4,7 +4,7 @@ import Loading from './Loading';
 import './Game.css';
 
 export default class Game extends Component {
-		constructor(props){
+		constructor(props) {
 				super(props);
 				const boardRows = props.rows || 4;
 				this.state = {
@@ -16,8 +16,8 @@ export default class Game extends Component {
 				this.startGame(this.props.getData);
 		}
 
-		startGame(fetchDataFunc){
-					 if(fetchDataFunc){
+		startGame(fetchDataFunc) {
+					 if(fetchDataFunc) {
 								fetchDataFunc().then((itemCollection) => {
 									 this.setState({
 												cards : this.generateDeck(itemCollection) 
@@ -26,19 +26,19 @@ export default class Game extends Component {
 					 }
 		}
 
-		restartGame(){
+		restartGame() {
 				  this.setState({cards : [], moveCounter: 0, previousCard: null});
 				  this.startGame(this.props.getData);
 		}
 
-		generateDeck(items){
+		generateDeck(items) {
 				  const duplicatedItems = items.reduce(
 							 (res,current) => res.concat([current,current]),[]);
 				  const deckSize = duplicatedItems.length;
 				  const orderedDeck = duplicatedItems
 							 .map((hero) => { return {value : hero, visible: false}});
 				  let shuffledDeck = [];
-				  for(let i=0; i < deckSize; i++){
+				  for(let i=0; i < deckSize; i++) {
 							 const randomIndex = Math.floor(Math.random() * 
 										(orderedDeck.length - i)); 
 							 shuffledDeck.push(orderedDeck.splice(randomIndex, 1)[0]);
@@ -46,10 +46,10 @@ export default class Game extends Component {
 				  return shuffledDeck;
 		}
 
-		hideCardsWithDelay(cardsToHide){
+		hideCardsWithDelay(cardsToHide) {
 				  setTimeout(() => {
 							 const cards = this.state.cards.slice();
-							 if(cardsToHide && cards.length > 0){
+							 if(cardsToHide && cards.length > 0) {
 										cardsToHide.forEach((card) => {
 												  cards[card].visible = false;
 										});
@@ -59,7 +59,7 @@ export default class Game extends Component {
 		}
 
 		isGameOver(cards) {
-				  if(cards.length){
+				  if(cards.length) {
 							 return !cards.map((card) => card.visible).includes(false);
 				  }
 				  return false;
@@ -68,12 +68,12 @@ export default class Game extends Component {
 		handleClick(i) {
 				  const cards = this.state.cards.slice();
 				  let previousCard = this.state.previousCard;
-				  if(this.isGameOver(cards) || cards[i].visible){
+				  if(this.isGameOver(cards) || cards[i].visible) {
 							 return;
 				  }
 				  cards[i].visible = true; //always show
-							 if(previousCard !== null){ //has previously selected card
-										if(cards[previousCard].value.id !== cards[i].value.id){ 
+							 if(previousCard !== null) { //has previously selected card
+										if(cards[previousCard].value.id !== cards[i].value.id) { 
 												  this.hideCardsWithDelay([previousCard, i]);
 										}
 										previousCard = null; //clear
@@ -92,7 +92,7 @@ export default class Game extends Component {
 				  const winner = this.isGameOver(cards);
 
 				  let status, board;
-				  if(winner){
+				  if(winner) {
 							 status = 'Congrats! You\'ve won the game in ' 
 										+ this.state.moveCounter + ' moves.';
 				  }else{

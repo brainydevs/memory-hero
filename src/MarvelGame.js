@@ -5,14 +5,14 @@ import Game from './Game';
 
 const gameRows = 4; //Change to 6 for increased difficulty
 export default class MarvelGame extends Component {
-				render(){
+				render() {
 						  return (<div>
 												<Game rows={gameRows} getData={this.getHeroesFromMarvel}/> 
 												<span class='copyright'>Data provided by Marvel. © 2014 Marvel</span>
 									 </div>);
 				}
 
-				getHeroesFromMarvel(){
+				getHeroesFromMarvel() {
 								const howMany = (gameRows * gameRows) / 2;
 								const offset = Math.floor(Math.random() * 300); //random recently modified heroes
 								const url = 'https://gateway.marvel.com/v1/public/characters?orderBy=-modified&limit=' 

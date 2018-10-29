@@ -12,14 +12,14 @@ export default class Board extends Component {
 		}
 		renderRow(row) {
 				let renderedCards = [];
-				for(let i = (row - 1) * this.props.rows; i < row * this.props.rows; i++){
+				for(let i = (row - 1) * this.props.rows; i < row * this.props.rows; i++) {
 						renderedCards.push(this.renderCard(i));
 				}
 				return renderedCards;
 		}
 		renderBoard() {
 				let board = [];
-				for(let i=1; i <= this.props.rows; i++){
+				for(let i=1; i <= this.props.rows; i++) {
 						board.push(<div key={i} className="board-row">
 										{this.renderRow(i)}
 								     </div>);

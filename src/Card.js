@@ -14,8 +14,8 @@ export default class Card extends Component {
 					 </div>);
 		  }
 
-		  componentWillMount(){
-					 if(this.props.value){
+		  componentWillMount() {
+					 if(this.props.value) {
 								const img = document.createElement('img');
 								img.src = this.props.value.img; //Requests the image
 					 }
