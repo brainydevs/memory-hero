@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Board from './Board';
+import Loading from './Loading';
 import './Game.css';
 
 export default class Game extends Component {
@@ -97,22 +98,18 @@ export default class Game extends Component {
 				  }else{
 							 status = 'Moves: ' + this.state.moveCounter;
 				  } 
-				  if(cards.length === 0) {
-							 board = <div className='loading'> Game is loading, please wait... </div>
-							 //TODO: create loading component with neat animation
-							 } else {
-										board = (<Board cards={cards} rows={this.state.boardRows}
-															 onClick={(i) => this.handleClick(i)}/>);
-							 }
-							 return (<div className="game">
-										<div className="game-info">
-												  <button className="reset-btn"
-															 onClick={()=> this.restartGame()}>Restart game</button>
-												  <div>{status}</div>
-										</div>
-										<div className="game-board">
-												  {board}
-										</div>
-							 </div>);
+				  board = (cards.length === 0 ?
+										<Loading/> : 
+										<Board cards={cards} rows={this.state.boardRows} onClick={(i) => this.handleClick(i)}/>);
+				  return (<div className="game">
+							 <div className="game-info">
+										<button className="reset-btn"
+												  onClick={()=> this.restartGame()}>Restart game</button>
+										<div>{status}</div>
+							 </div>
+							 <div className="game-board">
+										{board}
+							 </div>
+				  </div>);
 		}
 }
