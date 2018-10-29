@@ -8,7 +8,7 @@ export default class MarvelGame extends Component {
 				render() {
 						  return (<div>
 												<Game rows={gameRows} getData={this.getHeroesFromMarvel}/> 
-												<span class='copyright'>Data provided by Marvel. © 2014 Marvel</span>
+												<span className='copyright'>Data provided by Marvel. © 2014 Marvel</span>
 									 </div>);
 				}
 

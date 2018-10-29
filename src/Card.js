@@ -4,7 +4,7 @@ export default class Card extends Component {
 		  render() {
 					 let visible = this.props.visible ? 'visible' : '';
 					 return (<div className={'flip-container '+ visible} >
-								<div class="flipper" onClick={this.props.onClick}>
+								<div className="flipper" onClick={this.props.onClick}>
 										  <button className='back card card-back'/>
 										  <button className='front card card-front'>
 													 <img alt="Superhero icon" src={this.props.value.img}/>
