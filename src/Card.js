@@ -1,22 +1,23 @@
 import React, {Component} from 'react';
 
 export default class Card extends Component {
-				render() {
-								if(this.props.visible){
-												return (
-																<button className='card card-front' onClick={this.props.onClick}>
-																				<img alt="Superhero icon" src={this.props.value.img}/>
-																				{this.props.value.name}
-																</button>
-																);
-								}
-								return <button className='card card-back' onClick={this.props.onClick}/>;
-				}
+		  render() {
+					 let visible = this.props.visible ? 'visible' : '';
+					 return (<div className={'flip-container '+ visible} >
+								<div class="flipper" onClick={this.props.onClick}>
+										  <button className='back card card-back'/>
+										  <button className='front card card-front'>
+													 <img alt="Superhero icon" src={this.props.value.img}/>
+													 {this.props.value.name}
+										  </button>
+								</div>
+					 </div>);
+		  }
 
-				componentWillMount(){
-								if(this.props.value){
-												const img = document.createElement('img');
-												img.src = this.props.value.img; //Requests the image
-								}
-				}
+		  componentWillMount(){
+					 if(this.props.value){
+								const img = document.createElement('img');
+								img.src = this.props.value.img; //Requests the image
+					 }
+		  }
 } 
