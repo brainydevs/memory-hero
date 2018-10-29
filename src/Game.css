@@ -18,15 +18,18 @@ ol, ul {
 }
 
 .card {
-  border: 5px double #999;
+  border: 1px solid #999;
   float: left;
   font-size: 12px;
   height: 120px;
-  margin-right: 5px;
-  margin-top: 5px;
+  margin-right: 10px;
+  margin-top: 10px;
   padding: 0;
   text-align: center;
   width: 90px;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
 }
 
 .card-front img {
@@ -40,7 +43,7 @@ ol, ul {
   background: #fff;
 }
 .card-back{
-  background: #ddd;
+  background: #cc3e3e;
 }
 
 .card:focus {
@@ -60,4 +63,30 @@ ol, ul {
 .game-info {
   margin-left: 0px;
   margin-bottom: 10px;
+  display:inline-flex;
+  line-height: 40px;
+}
+
+button, button:active, button:focus {
+		  outline: 0;
+		  outline: none !important;
+	}
+
+	button::-moz-focus-inner {
+			  border: 0;
+	}
+
+.reset-btn {
+		  border: 0px;
+		  background: #960303;
+		  padding: 4px 10px;
+		  border-radius: 10px;
+		  color: white;
+		  font-size: 14px;
+		  vertical-align: middle;
+		  margin-right:10px;
+}
+
+.reset-btn:hover {
+		  background: #4f010b;
 }

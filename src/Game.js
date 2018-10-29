@@ -12,13 +12,22 @@ export default class Game extends Component {
 						  moveCounter: 0,
 						  boardRows: boardRows
 				};
-				if(this.props.getData){
-						  this.props.getData().then((itemCollection) => {
+				this.startGame(this.props.getData);
+		}
+
+		startGame(fetchDataFunc){
+					 if(fetchDataFunc){
+								fetchDataFunc().then((itemCollection) => {
 									 this.setState({
-												cards : this.generateDeck(itemCollection),
+												cards : this.generateDeck(itemCollection) 
 									 });
-						  })
-				}
+						  });
+					 }
+		}
+
+		restartGame(){
+				  this.setState({cards : [], moveCounter: 0, previousCard: null});
+				  this.startGame(this.props.getData);
 		}
 
 		generateDeck(items){
@@ -38,14 +47,14 @@ export default class Game extends Component {
 
 		hideCardsWithDelay(cardsToHide){
 				  setTimeout(() => {
-							 if(cardsToHide){
-										const cards = this.state.cards.slice();
+							 const cards = this.state.cards.slice();
+							 if(cardsToHide && cards.length > 0){
 										cardsToHide.forEach((card) => {
 												  cards[card].visible = false;
 										});
 										this.setState({ cards : cards });
 							 }
-				  },500);
+				  },1000);
 		}
 
 		isGameOver(cards) {
@@ -90,16 +99,19 @@ export default class Game extends Component {
 				  } 
 				  if(cards.length === 0) {
 							 board = <div className='loading'> Game is loading, please wait... </div>
+							 //TODO: create loading component with neat animation
 							 } else {
 										board = (<Board cards={cards} rows={this.state.boardRows}
 															 onClick={(i) => this.handleClick(i)}/>);
 							 }
 							 return (<div className="game">
 										<div className="game-info">
+												  <button className="reset-btn"
+															 onClick={()=> this.restartGame()}>Restart game</button>
 												  <div>{status}</div>
-												  <div className="game-board">
-															 {board}
-												  </div>
+										</div>
+										<div className="game-board">
+												  {board}
 										</div>
 							 </div>);
 		}

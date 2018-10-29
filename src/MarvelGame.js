@@ -11,13 +11,17 @@ export default class MarvelGame extends Component {
 
 				getHeroesFromMarvel(){
 								const howMany = (gameRows * gameRows) / 2;
-								const url = 'https://gateway.marvel.com/v1/public/characters?limit=' 
-												+ howMany + '&ts=' + Auth.ts + '&apikey=' + Auth.apikey + '&hash=' + Auth.hash;
+								const offset = Math.floor(Math.random() * 300); //random recently modified heroes
+								const url = 'https://gateway.marvel.com/v1/public/characters?orderBy=-modified&limit=' 
+										  + howMany +'&offset='+ offset + '&ts=' + Auth.ts + '&apikey=' + Auth.apikey + '&hash=' + Auth.hash;
 								return fetch(url).then((response) => {
 												return response.json();
 								}).then((json) => {
 												const heroes = json.data.results;
-												return heroes.map((hero) => { return { id: hero.id, name: hero.name, 
+												return heroes.map((hero) => { 
+														  const simpleName = hero.name.includes('(') ? 
+																	 hero.name.substring(0,hero.name.indexOf('(')) : hero.name;
+														  return { id: hero.id, name: simpleName, 
 																img: hero.thumbnail.path + '.' + hero.thumbnail.extension }});
 								});
 				}
