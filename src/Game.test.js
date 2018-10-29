@@ -1,7 +1,6 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import Game from './Game';
-//import Board from './Board';
 
 let wrapper = shallow(<Game />);
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Game from './Game'
+import MarvelGame from './MarvelGame'
 
 ReactDOM.render(
-		<Game rows={4}/>,
+		<MarvelGame/>,
 		document.getElementById('root')
 );

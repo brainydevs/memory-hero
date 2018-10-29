@@ -17,23 +17,17 @@ export default class Board extends Component {
 				}
 				return renderedCards;
 		}
-		renderBoard(){
+		renderBoard() {
 				let board = [];
 				for(let i=1; i <= this.props.rows; i++){
-						board.push(
-								<div key={i} className="board-row">
+						board.push(<div key={i} className="board-row">
 										{this.renderRow(i)}
-								</div>
-								);
+								     </div>);
 				}
 				return board;
 		}
 
 		render() {
-				return (
-						<div>
-								{this.renderBoard()}
-						</div>
-						);
+				return (<div> {this.renderBoard()} </div>);
 		}
 }
