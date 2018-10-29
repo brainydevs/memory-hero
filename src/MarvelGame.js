@@ -6,7 +6,10 @@ import Game from './Game';
 const gameRows = 4; //Change to 6 for increased difficulty
 export default class MarvelGame extends Component {
 				render(){
-								return <Game rows={gameRows} getData={this.getHeroesFromMarvel}/>
+						  return (<div>
+												<Game rows={gameRows} getData={this.getHeroesFromMarvel}/> 
+												<span class='copyright'>Data provided by Marvel. © 2014 Marvel</span>
+									 </div>);
 				}
 
 				getHeroesFromMarvel(){

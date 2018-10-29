@@ -1,6 +1,7 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
+  margin-bottom:20px;
 }
 
 ol, ul {
@@ -15,6 +16,17 @@ ol, ul {
 
 .status {
   margin-bottom: 10px;
+}
+
+.copyright {
+		  position:fixed;
+		  height: 20px;
+		  background-color: #fbc4c4;
+		  bottom: 0px;
+		  left: 0px;
+		  right: 0px;
+		  margin-bottom: 0px;
+		  padding-left:20px;
 }
 
 .card {
