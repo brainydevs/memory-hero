@@ -101,7 +101,7 @@ export default class Game extends Component {
 				  board = (cards.length === 0 ?
 										<Loading/> : 
 										<Board cards={cards} rows={this.state.boardRows} onClick={(i) => this.handleClick(i)}/>);
-				  return (<div className="game">
+				  return (<div className="game" style={{width: this.state.boardRows * 100 + 'px'}}>
 							 <div className="game-info">
 										<button className="reset-btn"
 												  onClick={()=> this.restartGame()}>Restart game</button>
